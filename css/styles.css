@@ -43,6 +43,7 @@ body {
     z-index: 1000;
     transition: all 0.3s ease;
     padding: 50px 0;
+    
 }
 
 .navbar.scrolled {
@@ -250,8 +251,8 @@ text-decoration: none !important; /* prevents underline */
 .marquee-content span {
     display: inline-block;
     padding: 0 30px;
-    font-size: 14px;
-    font-weight: 19;
+    font-size: 16px;
+    font-weight: 40;
     letter-spacing: 2px;
     color: #ffffff;
 }

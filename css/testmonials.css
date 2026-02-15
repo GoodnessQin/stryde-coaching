@@ -213,18 +213,19 @@
         order: 1 !important;
         grid-area: unset !important;
         text-align: left;
-        margin-bottom: 20px;
+        padding-left: 0px;
     }
 
     .testimonial-content h2 {
         font-size: 22px;
-        margin-bottom: 8px;
-        color: var(--cream);
+        padding-bottom: 15px;
+        color: var(--gold);
     }
 
     .testimonial-credentials {
         font-size: 12px;
-        margin-bottom: 0;
+        padding-bottom: 20px;
+        text-align: left;
         color: var(--white);
     }
 
@@ -234,8 +235,11 @@
         grid-area: unset !important;
         display: flex;
         justify-content: left;
-        margin-bottom: 25px;
+        align-items: left;
+        padding-bottom: 25px;
         position: relative;
+            width: 100%;  /* ✅ ADDED */
+
     }
 
     .testimonial-photo {
@@ -244,10 +248,7 @@
     }
 
     .quote-mark {
-        font-size: 90px;
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%);
+        display: none;
     }
 
     /* ORDER 3: Description text LAST (below image) */
@@ -258,9 +259,9 @@
 
     .testimonial-text {
         font-size: 14px;
-        text-align: left;
+        text-align: justify;
         color: var(--white);
-        margin-bottom: 15px;
+        padding-bottom: 20px;
     }
 
     .testimonial-text:last-child {

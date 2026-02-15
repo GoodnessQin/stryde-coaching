@@ -33,7 +33,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .services-hero-content {
@@ -213,9 +213,36 @@
     margin-bottom: 28px;
 }
 
-.service-card .btn-primary {
+/* ===================================
+   BUTTON LINK STYLES
+   Make <a> links look exactly like buttons
+   =================================== */
+.service-card .btn-primary,
+.services-cta-box .btn-primary {
+    display: inline-block;
     padding: 14px 35px;
     font-size: 13px;
+    background-color: var(--dark-green);
+    color: var(--gold);
+    border: none;
+    text-decoration: none;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.service-card .btn-primary:hover,
+.services-cta-box .btn-primary:hover {
+    background-color: var(--gold);
+    transform: translateY(-2px);
+    color: var(--dark-green);
+    box-shadow: 0 10px 25px rgba(203, 180, 132, 0.3);
+}
+
+.service-card .btn-primary:active,
+.services-cta-box .btn-primary:active {
+    transform: translateY(0);
 }
 
 .slider-dots {
@@ -361,7 +388,7 @@
 @media (max-width: 768px) {
     .services-hero {
         min-height: 80vh;
-        margin-bottom: -180px;
+        margin-bottom: -100px;
         padding: 100px 0 60px;
         padding-bottom: 50px;
     }
