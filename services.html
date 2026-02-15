@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/stryde.svg">
+    <title>Services - Stryde Coaching</title>
+    <link rel="stylesheet" href="css/enhanced-main.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mobile-responsive.css">
+    <link rel="stylesheet" href="css/service.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"/>
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- ===================================
+     UPDATED NAVIGATION HTML
+     Copy this ENTIRE nav section to replace the nav in ALL your HTML files
+     (index.html, about.html, services.html, testimonials.html, contact.html)
+     =================================== -->
+
+<nav class="navbar" id="navbar">
+    <div class="container nav-container">
+        <div class="logo">
+            <img src="assets/icons/logo.svg" alt="Stryde Coaching">
+        </div>
+        
+        <ul class="nav-menu">
+            <!-- Page Links -->
+            <li><a href="index.html" class="nav-link">HOME</a></li>
+            <li><a href="about.html" class="nav-link">ABOUT US</a></li>
+            <li><a href="testimonials.html" class="nav-link">TESTIMONIALS</a></li>
+            <li><a href="services.html" class="nav-link active">SERVICES</a></li>
+            
+            <!-- Mobile-only: Contact Button -->
+            <li class="mobile-only" style="margin-top: 30px; border-top: 1px solid rgba(203, 180, 132, 0.2); padding-top: 20px;">
+                <a href="contact.html" class="mobile-contact-btn">CONTACT US</a>
+            </li>
+            
+            <!-- Mobile-only: Social Icons -->
+            <li class="mobile-only" style="border: none;">
+                <div class="mobile-social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/excelsiorhrs" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </li>
+        </ul>
+        
+        <!-- Desktop Only: Social Icons & Contact Button -->
+        <div class="nav-right">
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <a href="contact.html" class="btn-contact">Contact Us</a>
+        </div>
+        
+        <!-- Hamburger Icon -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+    <!-- Services Hero -->
+    <section class="services-hero">
+        <div class="services-hero-bg"></div>
+        <div class="container">
+            <div class="services-hero-content">
+                <h1>FEATURED SERVICES</h1>
+                <p class="hero-subtitle">Discover Your Path To Transformation</p>
+                <p class="service-tagline">We help you clarify your goals and take the next steps with confidence.
+Our sessions are designed to <br> give you practical guidance and direction..</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slider Section -->
+    <section class="featured-services-section">
+        <div class="container">
+            <div class="services-slider">
+                <button class="slider-arrow slider-arrow-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+
+                <button class="slider-arrow slider-arrow-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+
+                <div class="service-card active" data-index="0">
+                    <div class="service-card-image">
+                        <img src="assets/images/service-card-1.png" alt="Career Strategy Sessions">
+                    </div>
+                    <div class="service-card-content">
+                        <div class="service-tag">
+                            <span class="service-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <circle cx="10" cy="10" r="8" stroke="#CBB484" stroke-width="1.5"/>
+                                    <circle cx="10" cy="10" r="3" fill="#CBB484"/>
+                                </svg>
+                            </span>
+                            <span>Live Session</span>
+                        </div>
+                        <h3>Career Strategy Sessions</h3>
+                        <p>Personalised one-to-one sessions designed to help you gain clarity, build confidence, and take purposeful next steps in your career.</p>
+                        <button class="btn-primary">BOOK A DISCOVERY CALL</button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-index="1">
+                    <div class="service-card-image">
+                        <img src="assets/images/service-card-2.png" alt="Career Coaching">
+                    </div>
+                    <div class="service-card-content">
+                        <div class="service-tag">
+                            <span class="service-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <circle cx="10" cy="10" r="8" stroke="#CBB484" stroke-width="1.5"/>
+                                    <circle cx="10" cy="10" r="3" fill="#CBB484"/>
+                                </svg>
+                            </span>
+                            <span>Live Session</span>
+                        </div>
+                        <h3>Career Coaching & Mentoring</h3>
+                        <p>A personalised, long-term coaching partnership focused on helping you grow with clarity and confidence.</p>
+                        <button class="btn-primary">BOOK A DISCOVERY CALL</button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-index="2">
+                    <div class="service-card-image">
+                        <img src="assets/images/service-card-3.png" alt="Group Coaching">
+                    </div>
+                    <div class="service-card-content">
+                        <div class="service-tag">
+                            <span class="service-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <circle cx="10" cy="10" r="8" stroke="#CBB484" stroke-width="1.5"/>
+                                    <circle cx="10" cy="10" r="3" fill="#CBB484"/>
+                                </svg>
+                            </span>
+                            <span>Live Session</span>
+                        </div>
+                        <h3>Group Coaching Sessions</h3>
+                        <p>Experience powerful, guided group coaching designed to help you gain clarity, build confidence, and move forward with purpose.</p>
+                        <button class="btn-primary">BOOK A DISCOVERY CALL</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-dots">
+                <span class="slider-dot active" data-slide="0"></span>
+                <span class="slider-dot" data-slide="1"></span>
+                <span class="slider-dot" data-slide="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>Let's Take Audacious Strydes Together</span>
+                <span>Let's Take Audacious Strydes Together</span>
+                <span>Let's Take Audacious Strydes Together</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Services -->
+    <section class="additional-services-section">
+        <div class="container">
+            <h2 class="section-title-dark">ADDITIONAL SERVICES</h2>
+            <div class="additional-services-content">
+                <div class="additional-services-image">
+                    <div class="services-image-circle">
+                        <img src="assets/images/amakaspfp.png" alt="Chiamaka">
+                    </div>
+                    <div class="services-cta-box">
+                        <p class="cta-text">Get Expert Support Without Leaving Your Space</p>
+                        <button class="btn-primary">REQUEST NOW</button>
+                    </div>
+                </div>
+
+                <div class="additional-services-list">
+                    <div class="service-item">
+                        <span class="service-number">01</span>
+                        <div class="service-details">
+                            <h3>Mock Interview Preparation</h3>
+                            <p>Structured practice sessions with personalised feedback to strengthen your delivery and interview presence.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">02</span>
+                        <div class="service-details">
+                            <h3>CV Review</h3>
+                            <p>In-depth CV refinement to highlight your strengths and position you competitively.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">03</span>
+                        <div class="service-details">
+                            <h3>Job Application Assistance</h3>
+                            <p>Strategic guidance with applications, ensuring your experience is clearly aligned with each role.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">04</span>
+                        <div class="service-details">
+                            <h3>LinkedIn Optimization</h3>
+                            <p>Professional profile enhancement to increase visibility, credibility, and career opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer scale-in">
+        <div class="container footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <img src="assets/icons/logo.svg" alt="Stryde Coaching">
+                </div>
+
+                <h4>Find Us</h4>
+                <p>Connect with us across our social handles</p>
+                <div class="footer-social">
+                    <a href="https://twitter.com/strydecoaching" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/excelsiorhrs" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class = "footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="#">Discovery Calls</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Additional</h4>
+                <ul>
+                    <li><a href="#">Mock Interview Preparation</a></li>
+                    <li><a href="#">Job Application Assistance</a></li>
+                    <li><a href="#">LinkedIn Optimization</a></li>
+                    <li><a href="#">CV Review</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+2347422368146">+2347422368146</a></li>
+                    <li><a href="mailto:hello@strydecoaching.com">hello@strydecoaching.com</a></li>
+                </ul>
+            </div>
+
+            
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p><a href="#">PRIVACY POLICY</a> | <a href="#">© STRYDE COACHING</a> | ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/stryde.js"></script>
+
+        <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

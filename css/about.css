@@ -1,0 +1,539 @@
+:root {
+    --dark-green: #1B201C;
+    --cream: #FFF4DC;
+    --gold: #CBB484;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+
+/* ===================================
+   ABOUT PAGE STYLES
+   =================================== */
+
+/* About Hero Section */
+.about-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px; /* just navbar space */
+    text-align: center;
+}
+
+.about-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/images/meet.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+.about-hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+}
+
+.about-hero-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 80px;
+    color: var(--white);
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.about-hero .hero-subtitle {
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+.about-hero .hero-tagline {
+    font-size: 14px;
+    margin-bottom: 70px;
+    font-style: italic;
+    color: var(--white);
+}
+
+
+/* Hero Content Box - Overlapping */
+.hero-content-box {
+    position: relative;
+    z-index: 20;
+    margin-top: -140px;
+    padding: 0 0 80px;
+    align-content: center;
+    justify-content: center; /* 👈 THIS is the missing piece */
+
+}
+
+
+.content-box {
+        margin: 0 auto; /* double safety */
+    background-color: var(--white);
+    padding: 50px 60px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+}
+
+.content-box p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.content-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* About Us Title Section */
+.about-us-title-section {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.about-us-title-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/images/abt.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+.about-us-title-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 18, 24, 0.7);
+}
+
+.section-heading {
+    position: relative;
+    z-index: 1;
+    font-size: 60px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--white);
+    letter-spacing: 4px;
+}
+
+/* About Stryde Content Section */
+.about-stryde-section {
+    padding: 100px 0;
+    background-color: #F1EFEA;
+}
+
+.about-stryde-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.about-main-image {
+    width: 400px;
+    height: 500px;
+    border-radius: 200px 0px 200px 200px;
+    overflow: hidden;
+  
+    position: relative;
+    z-index: 1;
+}
+
+.about-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.success-result-card {
+      position: absolute;
+    bottom: 100px;
+    right: -30px;
+    background-color: var(--white);
+    padding: 10px 10px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+    min-width: 220px;
+
+    display: flex;               /* 👈 ROW layout */
+    align-items: left;
+    gap: 10px;
+}
+
+.card-header {
+   display: flex;
+    align-items: center;
+    border: none;
+}
+
+.badge-icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+.badge-text {
+    display: flex;
+    flex-direction: column;
+      line-height: 1.15;
+
+}
+
+.badge-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-green);
+}
+
+.badge-subtitle {
+    font-size: 13px;
+    color: #666;
+}
+
+.percentage-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.percentage-text {
+    position: absolute;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dark-green);
+}
+
+.about-text-content {
+    padding: 20px 0;
+}
+
+.about-text-content h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.about-text-content p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.about-text-content button {
+    margin-top: 20px;
+}
+
+/* Values Section */
+.values-section {
+    position: relative;
+    padding: 100px 0;
+    background-color: var(--dark-green);
+}
+
+.values-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-image: url('../assets/images/our-value-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+
+.values-section .section-heading {
+    color: var(--white);
+    margin-bottom: 60px;
+}
+
+.values-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.value-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(203, 180, 132, 0.2);
+    transition: all 0.3s ease;
+}
+
+.value-card:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--gold);
+    transform: translateY(-5px);
+}
+
+.value-icon {
+    margin-bottom: 20px;
+}
+
+.value-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.value-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--white);
+}
+
+.values-cta {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+
+
+/* ===================================
+   MOBILE RESPONSIVE - COMPLETE FIX
+   =================================== */
+
+@media (max-width: 1024px) {
+    .about-stryde-content {
+        gap: 60px;
+    }
+
+    .about-main-image {
+        width: 340px;
+        height: 440px;
+    }
+
+    .success-result-card {
+        right: -20px;
+        bottom: 30px;
+        padding: 20px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Hero Section */
+    .about-hero {
+        padding: 140px 0 120px;
+        margin-bottom: -80px;
+        min-height: 80vh;
+    }
+
+    .about-hero-header {
+        margin-top: 0;
+    }
+
+    .about-hero h1 {
+        font-size: 40px;
+        letter-spacing: 2px;
+    }
+
+    .hero-text-box {
+        padding: 35px 30px;
+        max-width: 100%;
+    }
+
+    .hero-text-box p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    /* About Stryde Content */
+    .about-stryde-content {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+    }
+
+    .about-image-container {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .about-main-image {
+        width: 100%;
+        height: 350px;
+        border-radius: 180px 0px 180px 180px;
+    }
+
+    /* ⭐ SUCCESS CARD - STAYS ABSOLUTE (SaaS Standard) ⭐ */
+    .success-result-card {
+        position: absolute !important;  /* ✅ Overlaps image */
+        bottom: 20px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        max-width: 260px !important;
+        padding: 15px 20px !important;
+        z-index: 10 !important;
+    }
+
+    .percentage-circle {
+        width: 70px;
+        height: 70px;
+        flex-shrink: 0;
+    }
+
+    .percentage-circle svg {
+        width: 70px;
+        height: 70px;
+    }
+
+    .percentage-text {
+        font-size: 20px;
+    }
+
+    .badge-title {
+        font-size: 15px;
+    }
+
+    .badge-subtitle {
+        font-size: 11px;
+    }
+
+    /* Text Content */
+    .about-text-content {
+        text-align: center;
+    }
+
+    .about-text-content h2,
+    .about-text-content h3 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .about-text-content p {
+        font-size: 14px;
+        line-height: 1.8;
+        text-align: left;
+    }
+
+    /* About Us Title */
+    .about-us-title-section {
+        padding: 80px 0;
+    }
+
+    .section-heading {
+        font-size: 38px;
+        letter-spacing: 2px;
+    }
+
+    /* Values Grid */
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .value-card {
+        padding: 35px 30px;
+    }
+
+    .value-card h3 {
+        font-size: 22px;
+    }
+
+    .value-card p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero {
+        padding: 120px 0 100px;
+    }
+
+    .about-hero h1 {
+        font-size: 32px;
+    }
+
+    .hero-text-box {
+        padding: 30px 25px;
+    }
+
+    .about-main-image {
+        height: 300px;
+    }
+
+    .success-result-card {
+        max-width: 90% !important;
+        padding: 12px 15px !important;
+    }
+
+    .percentage-circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    .percentage-circle svg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .percentage-text {
+        font-size: 18px;
+    }
+
+    .about-text-content h2,
+    .about-text-content h3 {
+        font-size: 28px;
+    }
+
+    .section-heading {
+        font-size: 32px;
+    }
+}

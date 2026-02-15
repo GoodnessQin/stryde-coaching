@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/stryde.svg">
+    <title>Contact Us - Stryde Coaching</title>
+    <!-- Add BEFORE your existing stylesheet links -->
+<link rel="stylesheet" href="css/enhanced-main.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mobile-responsive.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- ===================================
+     UPDATED NAVIGATION HTML
+     Copy this ENTIRE nav section to replace the nav in ALL your HTML files
+     (index.html, about.html, services.html, testimonials.html, contact.html)
+     =================================== -->
+
+<nav class="navbar" id="navbar">
+    <div class="container nav-container">
+        <div class="logo">
+            <img src="assets/icons/logo.svg" alt="Stryde Coaching">
+        </div>
+        
+        <ul class="nav-menu">
+            <!-- Page Links -->
+            <li><a href="index.html" class="nav-link">HOME</a></li>
+            <li><a href="about.html" class="nav-link">ABOUT US</a></li>
+            <li><a href="testimonials.html" class="nav-link">TESTIMONIALS</a></li>
+            <li><a href="services.html" class="nav-link">SERVICES</a></li>
+            
+            <!-- Mobile-only: Contact Button -->
+            <li class="mobile-only" style="margin-top: 30px; border-top: 1px solid rgba(203, 180, 132, 0.2); padding-top: 20px;">
+                <a href="contact.html" class="mobile-contact-btn active">CONTACT US</a>
+            </li>
+            
+            <!-- Mobile-only: Social Icons -->
+            <li class="mobile-only" style="border: none;">
+                <div class="mobile-social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/excelsiorhrs" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </li>
+        </ul>
+        
+        <!-- Desktop Only: Social Icons & Contact Button -->
+        <div class="nav-right">
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <a href="contact.html" class="btn-contact">Contact Us</a>
+        </div>
+        
+        <!-- Hamburger Icon -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero">
+        <div class="contact-hero-bg"></div>
+        <div class="container">
+            <div class="contact-hero-content">
+                <h1>CONTACT US.</h1>
+                <p class="hero-subtitle">Book A Free Discovery Call</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Cards Section -->
+    <section class="contact-cards-section">
+        <div class="container">
+            <div class="contact-cards-wrapper">
+                <!-- Left Card - Information -->
+                <div class="contact-info-card">
+                    <h2>Sometimes all it takes is 30 focused minutes to gain clarity.</h2>
+                    
+                    <p class="intro-text">This short session helps you:</p>
+                    
+                    <ul class="benefits-list">
+                        <li>Step out of overwhelm</li>
+                        <li>Untangle what's really going on</li>
+                        <li>Get clear on your next move</li>
+                    </ul>
+                    
+                    <p class="description-text">Whether you're facing a career decision, feeling stuck, or navigating a transition, this is a safe, structured space to pause, reflect, and reset.</p>
+                    
+                    <p class="description-text">In just 30 minutes, you'll leave with perspective, direction, and practical next steps tailored to your situation, not a one-size-fits-all solution.</p>
+                </div>
+
+                <!-- Right Card - Contact Form -->
+                <div class="contact-form-card">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="fullName" name="fullName" placeholder="Your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your email address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="6" placeholder="Write a note about your request" required></textarea>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">Accept the above information will be used to contact you</label>
+                        </div>
+                            <a href="#" id="sendButton" class="btn-submit">SEND</a>
+                         
+                        
+                        <div id="formMessage" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thank You Modal -->
+    <div id="thankYouModal" class="thank-you-modal">
+        <div class="modal-overlay"></div>
+        
+        <!-- Animated Background -->
+        <div class="confetti-container" id="confetti"></div>
+        
+        <!-- Main Content -->
+        <div class="thank-you-container modal-content">
+            <!-- Close Button -->
+            <button class="modal-close" id="closeModal">&times;</button>
+            
+            <!-- Success Icon (Animated Check) -->
+            <div class="success-icon">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+
+            <!-- Animated Confetti Icons -->
+            <div class="celebration-icons">
+                <span class="icon" style="--delay: 0s;">🎉</span>
+                <span class="icon" style="--delay: 0.2s;">⭐</span>
+                <span class="icon" style="--delay: 0.4s;">🎊</span>
+                <span class="icon" style="--delay: 0.6s;">✨</span>
+                <span class="icon" style="--delay: 0.8s;">🎉</span>
+                <span class="icon" style="--delay: 1s;">⭐</span>
+            </div>
+
+            <!-- Main Message -->
+            <h1 class="thank-you-title">
+                Thank You for Booking<br>
+                Your 30-Minute Discovery Call!
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="thank-you-subtitle">
+                Check your email within 24 hours for your personalized session link, and get
+                ready to step out of overwhelm and move forward with confidence.
+            </p>
+
+            <!-- Next Steps (Optional) -->
+            <div class="next-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p>Check your email inbox</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p>Add the call to your calendar</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p>Prepare your questions</p>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <a href="index.html" class="btn-home">Go Back Home</a>
+
+            <!-- Social Share (Optional) -->
+            <div class="social-share">
+                <p>Share your excitement:</p>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?text=Just%20booked%20a%20discovery%20call%20with%20@StrydeCoaching!" target="_blank" aria-label="Share on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://strydecoaching.com" target="_blank" aria-label="Share on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Footer -->
+    <footer class="footer scale-in">
+        <div class="container footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <img src="assets/icons/logo.svg" alt="Stryde Coaching">
+                </div>
+
+                <h4>Find Us</h4>
+                <p>Connect with us across our social handles</p>
+                <div class="footer-social">
+                    <a href="https://twitter.com/strydecoaching" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/excelsiorhrs" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class = "footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="#">Discovery Calls</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Additional</h4>
+                <ul>
+                    <li><a href="#">Mock Interview Preparation</a></li>
+                    <li><a href="#">Job Application Assistance</a></li>
+                    <li><a href="#">LinkedIn Optimization</a></li>
+                    <li><a href="#">CV Review</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+2347422368146">+2347422368146</a></li>
+                    <li><a href="mailto:hello@strydecoaching.com">hello@strydecoaching.com</a></li>
+                </ul>
+            </div>
+
+            
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p><a href="#">PRIVACY POLICY</a> | <a href="#">© STRYDE COACHING</a> | ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Font Awesome -->
+       <script src="js/stryde.js"></script>
+
+
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+   
+    <script src="js/form.js"></script>
+</body>
+</html>
