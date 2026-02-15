@@ -218,6 +218,7 @@ text-decoration: none !important; /* prevents underline */
     font-size: 14px;
     font-weight: 300;
     letter-spacing: 1.5px;
+    text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
 }
