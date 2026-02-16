@@ -163,7 +163,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/images/home-hero-bg\ \(1\).png');
+    background-image: url('../assets/images/home-hero-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -382,7 +382,7 @@ body {
     left: 0;
     width: 100%;
     height: 70%;
-    background-image: url('../assets/images/services-bg.jpg');
+    background-image: url('../assets/images/services-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -601,7 +601,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/images/meet.png');
+    background-image: url('../assets/images/meet.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

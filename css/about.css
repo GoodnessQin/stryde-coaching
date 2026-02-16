@@ -28,7 +28,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/images/meet.png');
+    background-image: url('../assets/images/meet.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -125,7 +125,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/images/abt.png');
+    background-image: url('../assets/images/abt.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -285,7 +285,7 @@
     left: 0;
     width: 100%;
     height: 60%;
-    background-image: url('../assets/images/our-value-bg.png');
+    background-image: url('../assets/images/our-value-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
