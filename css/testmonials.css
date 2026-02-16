@@ -178,7 +178,12 @@
 @media (max-width: 768px) {
     .testimonials-hero {
         min-height: 50vh;
-        padding: 100px 0 80px;
+        display: flex;
+        flex-direction: column;  /* stack items vertically */
+        justify-content: center; /* center vertically */
+        align-items: center;     /* center horizontally */
+        padding: 60px 20px;      /* reduced top/bottom padding */
+        text-align: center;
     }
 
     .testimonials-hero-circle {
@@ -189,11 +194,13 @@
     .testimonials-hero h1 {
         text-align: center;
         font-size: 40px;
+        width: 100%;
     }
 
     .testimonials-hero .hero-subtitle {
         text-align: center;
         font-size: 14px;
+        width: 100%;
     }
 
     .testimonials-content-section {
