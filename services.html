@@ -12,76 +12,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"/>
 </head>
 <body>
-    <!-- Navigation -->
-    <!-- ===================================
-     UPDATED NAVIGATION HTML
-     Copy this ENTIRE nav section to replace the nav in ALL your HTML files
-     (index.html, about.html, services.html, testimonials.html, contact.html)
-     =================================== -->
-
-<nav class="navbar" id="navbar">
-    <div class="container nav-container">
-        <div class="logo">
-            <img src="assets/icons/logo.svg" alt="Stryde Coaching">
-        </div>
-        
-        <ul class="nav-menu">
-            <!-- Page Links -->
-            <li><a href="index.html" class="nav-link">HOME</a></li>
-            <li><a href="about.html" class="nav-link">ABOUT US</a></li>
-            <li><a href="testimonials.html" class="nav-link">TESTIMONIALS</a></li>
-            <li><a href="services.html" class="nav-link active">SERVICES</a></li>
-            
-            <!-- Mobile-only: Contact Button -->
-            <li class="mobile-only" style="margin-top: 30px; border-top: 1px solid rgba(203, 180, 132, 0.2); padding-top: 20px;">
-                <a href="contact.html" class="mobile-contact-btn">CONTACT US</a>
-            </li>
-            
-            <!-- Mobile-only: Social Icons -->
-            <li class="mobile-only" style="border: none;">
-                <div class="mobile-social-icons">
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/excelsiorhrs" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.linkedin.com/in/excelsiorhr" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </li>
-        </ul>
-        
-        <!-- Desktop Only: Social Icons & Contact Button -->
-        <div class="nav-right">
-            <div class="social-icons">
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/icons/logo.svg" alt="Stryde Coaching">
             </div>
-            <a href="contact.html" class="btn-contact">Contact Us</a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">HOME</a></li>
+                <li><a href="about.html" class="nav-link">ABOUT US</a></li>
+                <li><a href="testimonials.html" class="nav-link">TESTIMONIALS</a></li>
+                <li><a href="services.html" class="nav-link active">SERVICES</a></li>
+                
+                <li class="mobile-only" style="margin-top: 30px; border-top: 1px solid rgba(203, 180, 132, 0.2); padding-top: 20px;">
+                    <a href="contact.html" class="mobile-contact-btn">CONTACT US</a>
+                </li>
+                
+                <li class="mobile-only" style="border: none;">
+                    <div class="mobile-social-icons">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/excelsiorhrs" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.linkedin.com/in/excelsiorhr" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="nav-right">
+                <div class="social-icons">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <a href="contact.html" class="btn-contact">Contact Us</a>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        
-        <!-- Hamburger Icon -->
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</nav>
+    </nav>
 
-    <!-- Services Hero -->
     <section class="services-hero">
         <div class="services-hero-bg"></div>
         <div class="container">
             <div class="services-hero-content fade-in">
                 <h1>FEATURED SERVICES</h1>
                 <p class="hero-subtitle">Discover Your Path To Transformation</p>
-                <p class="service-tagline">We help you clarify your goals and take the next steps with confidence.
-Our sessions are designed to <br> give you practical guidance and direction..</p>
+                <p class="service-tagline">We help you clarify your goals and take the next steps with confidence.<br>Our sessions are designed to give you practical guidance and direction.</p>
             </div>
         </div>
     </section>
 
-    <!-- Slider Section -->
     <section class="featured-services-section">
         <div class="container">
             <div class="services-slider">
@@ -114,7 +99,6 @@ Our sessions are designed to <br> give you practical guidance and direction..</p
                         <h3>Career Strategy Sessions</h3>
                         <p>Personalised one-to-one sessions designed to help you gain clarity, build confidence, and take purposeful next steps in your career.</p>
                         <a href="https://calendar.app.google/1GaaAXJGoLZhuKMk8" target="_blank" class="btn-primary">BOOK A DISCOVERY CALL</a>
-
                     </div>
                 </div>
 
@@ -167,7 +151,6 @@ Our sessions are designed to <br> give you practical guidance and direction..</p
         </div>
     </section>
 
-    <!-- Marquee -->
     <div class="marquee-section">
         <div class="marquee">
             <div class="marquee-content">
@@ -178,56 +161,70 @@ Our sessions are designed to <br> give you practical guidance and direction..</p
         </div>
     </div>
 
-    <!-- Additional Services -->
+    <!-- ✅ CORRECT: Additional Services Section -->
     <section class="additional-services-section">
         <div class="container">
             <h2 class="section-title-dark fade-in">EXPANDED SUPPORT SERVICES</h2>
             <div class="additional-services-content">
+                
+                <!-- ✅ LEFT COLUMN: Image + CTA Text -->
                 <div class="additional-services-image">
+                    <!-- Image -->
                     <div class="services-image-circle slide-in-left">
                         <img src="assets/images/amakaspfp.png" alt="Chiamaka">
                     </div>
+                    
+                    <!-- ✅ CTA Text - MOVED HERE (below image on left) -->
                     <div class="services-cta-box">
-                        <p class="cta-text">Get Expert Support Without Leaving Your Space</p>
-                        <a href="contact.html" target="_blank" class="btn-primary fade-in">BOOK A DISCOVERY CALL</a>
+                        <p class="cta-text">Extra support. Deeper strategy. Stronger results.</p>
                     </div>
                 </div>
 
-                <div class="additional-services-list fade-in">
-                    <div class="service-item">
-                        <span class="service-number">01</span>
-                        <div class="service-details">
-                            <h3>Mock Interview Preparation</h3>
-                            <p>Structured practice sessions with personalised feedback to strengthen your delivery and interview presence.</p>
+                <!-- ✅ RIGHT COLUMN: List + Button -->
+                <div>
+                    <!-- Service Items List -->
+                    <div class="additional-services-list fade-in">
+                        <div class="service-item">
+                            <span class="service-number">01</span>
+                            <div class="service-details">
+                                <h3>Ace my interview</h3>
+                                <p>Structured practice sessions with personalised feedback to strengthen your delivery and interview presence.</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-number">02</span>
+                            <div class="service-details">
+                                <h3>Elevate my CV</h3>
+                                <p>In-depth CV refinement to highlight your strengths and position you competitively.</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-number">03</span>
+                            <div class="service-details">
+                                <h3>Apply with confidence</h3>
+                                <p>Strategic guidance with applications, ensuring your experience is clearly aligned with each role.</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-number">04</span>
+                            <div class="service-details">
+                                <h3>Enhance my LinkedIn presence</h3>
+                                <p>Professional profile enhancement to increase visibility, credibility, and career opportunities.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="service-item">
-                        <span class="service-number">02</span>
-                        <div class="service-details">
-                            <h3>CV Review</h3>
-                            <p>In-depth CV refinement to highlight your strengths and position you competitively.</p>
-                        </div>
-                    </div>
-                    <div class="service-item">
-                        <span class="service-number">03</span>
-                        <div class="service-details">
-                            <h3>Job Application Assistance</h3>
-                            <p>Strategic guidance with applications, ensuring your experience is clearly aligned with each role.</p>
-                        </div>
-                    </div>
-                    <div class="service-item">
-                        <span class="service-number">04</span>
-                        <div class="service-details">
-                            <h3>LinkedIn Optimization</h3>
-                            <p>Professional profile enhancement to increase visibility, credibility, and career opportunities.</p>
-                        </div>
+
+                    <!-- ✅ Button - ONLY in right column -->
+                    <div class="services-cta-box">
+                        <a href="https://wa.me/2348135672354" target="_blank" class="btn-primary fade-in">BOOK A DISCOVERY CALL</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+   <!-- Footer -->
     <footer class="footer fade-in">
         <div class="container footer-container">
             <div class="footer-column">
@@ -252,25 +249,25 @@ Our sessions are designed to <br> give you practical guidance and direction..</p
                     <li><a href="services.html">Services</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="#">Discovery Calls</a></li>
+                    <li><a href="contact.html">Discovery Calls</a></li>
                 </ul>
             </div>
 
             <div class="footer-column">
                 <h4>SUPPORT SERVICES</h4>
                 <ul>
-                    <li><a href="#">Mock Interview Preparation</a></li>
-                    <li><a href="#">Job Application Assistance</a></li>
-                    <li><a href="#">LinkedIn Optimization</a></li>
-                    <li><a href="#">CV Review</a></li>
+                    <li><a href="https://wa.me/2348135672354" target="_blank">Ace my interview</a></li>
+                    <li><a href="https://wa.me/2348135672354" target="_blank">Elevate my CV</a></li>
+                    <li><a href="https://wa.me/2348135672354" target="_blank">Apply with confidence</a></li>
+                    <li><a href="https://wa.me/2348135672354" target="_blank">Enhance my LinkedIn presence</a></li>
                 </ul>
             </div>
 
             <div class="footer-column">
                 <h4>Contact</h4>
                 <ul>
-                    <li><a href="tel:+2347422368146">+2347422368146</a></li>
-                    <li><a href="mailto:chinerdamaka@gmail.com">chinerdamaka@gmail.com</a></li>
+                    <li><i class="fas fa-phone"></i> +447879857119</li>
+                    <li><i class="fas fa-envelope"></i> chinerdamaka@gmail.com</li>
                 </ul>
             </div>
 
@@ -283,9 +280,8 @@ Our sessions are designed to <br> give you practical guidance and direction..</p
             </div>
         </div>
     </footer>
+
     <script src="js/stryde.js"></script>
-
-        <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
-
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 </body>
 </html>

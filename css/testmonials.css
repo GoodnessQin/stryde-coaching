@@ -115,6 +115,7 @@
 
 .testimonial-content {
     grid-area: content;
+    margin-bottom: -100px;
 }
 
 .testimonial-content h2 {
@@ -128,7 +129,7 @@
 .testimonial-credentials {
     font-size: 13px;
     color: #ffffff;
-    margin-bottom: 25px;
+    padding-bottom: 5px;
     line-height: 1.6;
     font-weight: 400;
 }

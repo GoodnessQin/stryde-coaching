@@ -1,12 +1,12 @@
 // ===================================
-// STRYDE COACHING - COMPLETE WORKING JS
-// Clean, No Conflicts, All Features
+// STRYDE COACHING - OPTIMIZED & FIXED
+// Fixed: Stats counter now properly detects 150 vs 50
 // ===================================
 
 console.log('✅ Stryde JS Loading...');
 
 // ===================================
-// 1. MOBILE NAVIGATION - WORKS PERFECTLY
+// 1. MOBILE NAVIGATION
 // ===================================
 (function() {
     console.log('📱 Mobile Nav: Starting...');
@@ -17,20 +17,13 @@ console.log('✅ Stryde JS Loading...');
     const body = document.body;
     
     if (!hamburger || !navMenu || !navRight) {
-        console.log('⚠️ Mobile nav elements missing:', {
-            hamburger: !!hamburger,
-            navMenu: !!navMenu,
-            navRight: !!navRight
-        });
+        console.log('⚠️ Mobile nav elements missing');
         return;
     }
-    
-    console.log('✅ All mobile nav elements found!');
     
     let isMenuOpen = false;
     
     function openMenu() {
-        console.log('📱 OPENING menu');
         hamburger.classList.add('active');
         navMenu.classList.add('active');
         navRight.classList.add('active');
@@ -39,7 +32,6 @@ console.log('✅ Stryde JS Loading...');
     }
     
     function closeMenu() {
-        console.log('📱 CLOSING menu');
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
         navRight.classList.remove('active');
@@ -55,52 +47,38 @@ console.log('✅ Stryde JS Loading...');
         }
     }
     
-    // Click hamburger
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
         e.preventDefault();
-        console.log('📱 Hamburger clicked!');
         toggleMenu();
     });
     
-    // Click menu links
     const menuLinks = navMenu.querySelectorAll('a');
     menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            console.log('📱 Menu link clicked');
-            closeMenu();
-        });
+        link.addEventListener('click', closeMenu);
     });
     
-    // Click outside
     document.addEventListener('click', function(e) {
         if (!isMenuOpen) return;
-        
         const clickedInsideMenu = navMenu.contains(e.target);
         const clickedInsideNavRight = navRight.contains(e.target);
         const clickedHamburger = hamburger.contains(e.target);
-        
         if (!clickedInsideMenu && !clickedInsideNavRight && !clickedHamburger) {
-            console.log('📱 Clicked outside');
             closeMenu();
         }
     });
     
-    // Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && isMenuOpen) {
-            console.log('📱 Escape pressed');
             closeMenu();
         }
     });
     
-    // Resize
     let resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
             if (window.innerWidth > 768 && isMenuOpen) {
-                console.log('📱 Resized to desktop');
                 closeMenu();
             }
         }, 250);
@@ -110,24 +88,26 @@ console.log('✅ Stryde JS Loading...');
 })();
 
 // ===================================
-// 2. SERVICES CAROUSEL
+// 2. SERVICES CAROUSEL - WITH HOVER PAUSE 🎠
 // ===================================
 (function() {
     const serviceCards = document.querySelectorAll('.service-card');
     const sliderDots = document.querySelectorAll('.slider-dot');
     const prevArrow = document.querySelector('.slider-arrow-prev');
     const nextArrow = document.querySelector('.slider-arrow-next');
+    const sliderContainer = document.querySelector('.services-slider');
     
     if (serviceCards.length === 0) {
-        console.log('ℹ️ No carousel found');
+        console.log('ℹ️ No carousel found on this page');
         return;
     }
     
-    console.log('🎠 Carousel: Found', serviceCards.length, 'cards');
+    console.log('🎠 Carousel Found! Cards:', serviceCards.length);
     
     let currentSlide = 0;
     const totalSlides = serviceCards.length;
-    let slideInterval;
+    let autoplayInterval = null;
+    let userIsHovering = false;
     
     function updateSlidePositions() {
         serviceCards.forEach((card, index) => {
@@ -157,46 +137,78 @@ console.log('✅ Stryde JS Loading...');
         updateSlidePositions();
     }
     
-    function startAutoSlide() {
-        slideInterval = setInterval(nextSlide, 3000);
+    function startAutoplay() {
+        stopAutoplay();
+        if (!userIsHovering) {
+            autoplayInterval = setInterval(nextSlide, 3000);
+            console.log('▶️ AUTOPLAY STARTED');
+        }
     }
     
-    function stopAutoSlide() {
-        clearInterval(slideInterval);
+    function stopAutoplay() {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+            autoplayInterval = null;
+        }
     }
     
-    // Initialize
+    function handleMouseEnter() {
+        console.log('🖱️ MOUSE ENTERED - Pausing');
+        userIsHovering = true;
+        stopAutoplay();
+    }
+    
+    function handleMouseLeave() {
+        console.log('🖱️ MOUSE LEFT - Resuming');
+        userIsHovering = false;
+        startAutoplay();
+    }
+    
     updateSlidePositions();
-    startAutoSlide();
+    startAutoplay();
     
-    // Arrows
+    if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', handleMouseEnter);
+        sliderContainer.addEventListener('mouseleave', handleMouseLeave);
+    }
+    
+    serviceCards.forEach((card) => {
+        card.addEventListener('mouseenter', handleMouseEnter);
+        card.addEventListener('mouseleave', handleMouseLeave);
+    });
+    
     if (prevArrow) {
         prevArrow.addEventListener('click', function() {
-            stopAutoSlide();
+            stopAutoplay();
             prevSlide();
-            startAutoSlide();
+            setTimeout(function() {
+                if (!userIsHovering) startAutoplay();
+            }, 2000);
         });
     }
     
     if (nextArrow) {
         nextArrow.addEventListener('click', function() {
-            stopAutoSlide();
+            stopAutoplay();
             nextSlide();
-            startAutoSlide();
+            setTimeout(function() {
+                if (!userIsHovering) startAutoplay();
+            }, 2000);
         });
     }
     
-    // Dots
     sliderDots.forEach((dot, index) => {
         dot.addEventListener('click', function() {
-            stopAutoSlide();
+            stopAutoplay();
             currentSlide = index;
             updateSlidePositions();
-            startAutoSlide();
+            setTimeout(function() {
+                if (!userIsHovering) startAutoplay();
+            }, 2000);
         });
     });
     
-    console.log('✅ Carousel: Ready!');
+    console.log('✅ Carousel Ready with HOVER PAUSE! 🎠');
 })();
 
 // ===================================
@@ -218,7 +230,6 @@ window.addEventListener('load', function() {
 // 4. NAVIGATION SCROLL
 // ===================================
 const navbar = document.getElementById('navbar');
-
 if (navbar) {
     window.addEventListener('scroll', function() {
         if (window.scrollY > 100) {
@@ -308,7 +319,7 @@ if (dots.length > 0) {
 }
 
 // ===================================
-// 9. STATS COUNTER
+// 9. STATS COUNTER - FIXED! ✅
 // ===================================
 function animateCounter(element, target, suffix) {
     suffix = suffix || '';
@@ -331,11 +342,17 @@ const statsObserver = new IntersectionObserver(function(entries) {
             const statCards = entry.target.querySelectorAll('.stat-card h3');
             statCards.forEach(function(card) {
                 const text = card.textContent.trim();
-                if (text.includes('50')) {
-                    animateCounter(card, 50, ' +');
-                } else if (text.includes('150')) {
-                    animateCounter(card, 150, ' +');
+                
+                // ✅ FIX: Check for 150 FIRST (before checking for 50)
+                // This prevents "150" from matching "50"
+                if (text.includes('150')) {
+                    console.log('✅ Animating to 150+');
+                    animateCounter(card, 150, '+');
+                } else if (text.includes('50')) {
+                    console.log('✅ Animating to 50+');
+                    animateCounter(card, 50, '+');
                 } else if (text.includes('98')) {
+                    console.log('✅ Animating to 98%');
                     animateCounter(card, 98, '%');
                 }
             });
@@ -383,5 +400,5 @@ navLinks.forEach(function(link) {
     }
 });
 
-console.log('✅ Stryde JS: All features loaded!');
-console.log('%c Stryde Coaching Ready! ', 'background: #CBB484; color: #00180A; font-size: 14px; font-weight: bold; padding: 6px;');
+console.log('✅ ALL FEATURES LOADED!');
+console.log('%c Stryde Coaching Ready! ', 'background: #CBB484; color: #00180A; font-size: 18px; font-weight: bold; padding: 10px;');
