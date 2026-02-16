@@ -187,10 +187,12 @@
     }
 
     .testimonials-hero h1 {
+        text-align: center;
         font-size: 40px;
     }
 
     .testimonials-hero .hero-subtitle {
+        text-align: center;
         font-size: 14px;
     }
 
