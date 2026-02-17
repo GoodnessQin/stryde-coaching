@@ -26,14 +26,14 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    /* REMOVED overflow-x: hidden - this caused the double scrollbar! */
 }
 
 body {
     font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
     color: var(--black);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: hidden; /* only on body, not html */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -78,11 +78,13 @@ img {
     justify-content: center;
     z-index: 9999;
     transition: opacity 0.6s ease, visibility 0.6s ease;
+    pointer-events: all;
 }
 
 .page-loader.hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none; /* CRITICAL: stops loader blocking scroll/clicks */
 }
 
 .loader-logo {
@@ -349,50 +351,44 @@ img {
 }
 
 /* ===================================
-   SCROLL ANIMATIONS
+   SCROLL ANIMATIONS - works on ALL screen sizes
    =================================== */
-.fade-in {
+
+/* Default: visible (fallback if JS fails or disabled) */
+.fade-in,
+.slide-in-left,
+.slide-in-right,
+.scale-in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+}
+
+/* animate-ready: hide before scroll triggers - ALL devices */
+.fade-in.animate-ready {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
 }
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.slide-in-left {
+.slide-in-left.animate-ready {
     opacity: 0;
     transform: translateX(-50px);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
 }
-
-.slide-in-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.slide-in-right {
+.slide-in-right.animate-ready {
     opacity: 0;
     transform: translateX(50px);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
 }
-
-.slide-in-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.scale-in {
+.scale-in.animate-ready {
     opacity: 0;
     transform: scale(0.9);
-    transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
 }
 
+/* visible: animate in - ALL devices */
+.fade-in.visible,
+.slide-in-left.visible,
+.slide-in-right.visible,
 .scale-in.visible {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 /* ===================================

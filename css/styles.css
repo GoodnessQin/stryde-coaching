@@ -17,6 +17,7 @@
 
 html {
     scroll-behavior: smooth;
+    /* overflow-x removed - was causing double scrollbar */
 }
 
 body {
@@ -501,8 +502,9 @@ body {
     animation: carouselScroll 40s linear infinite;
 }
 
-.carousel-track:hover {
-    animation-play-state: paused;
+/* Pause handled by JS for both desktop hover and mobile touch */
+.carousel-track.paused {
+    animation-play-state: paused !important;
 }
 
 .carousel-card {
@@ -781,14 +783,20 @@ body {
 }
 
 .section-animate {
+    opacity: 1; /* fallback if JS disabled */
+    transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* animate-ready: hide on ALL devices */
+.section-animate.animate-ready {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease;
 }
 
 .section-animate.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 /* ===================================

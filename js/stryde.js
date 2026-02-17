@@ -1,404 +1,287 @@
 // ===================================
-// STRYDE COACHING - OPTIMIZED & FIXED
-// Fixed: Stats counter now properly detects 150 vs 50
+// STRYDE COACHING - FIXED JS
+// Fixes: double scrollbar, blocked scroll, animations work on desktop only
 // ===================================
 
 console.log('✅ Stryde JS Loading...');
 
 // ===================================
-// 1. MOBILE NAVIGATION
+// 1. SCROLL ANIMATIONS - works on ALL screen sizes
 // ===================================
 (function() {
-    console.log('📱 Mobile Nav: Starting...');
-    
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navRight = document.querySelector('.nav-right');
-    const body = document.body;
-    
-    if (!hamburger || !navMenu || !navRight) {
-        console.log('⚠️ Mobile nav elements missing');
-        return;
+    var animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .section-animate');
+    if (animatedElements.length === 0) return;
+
+    // Mark all elements ready for animation (hide them)
+    animatedElements.forEach(function(el) {
+        el.classList.add('animate-ready');
+    });
+
+    // Reveal elements as they scroll into view - on ALL devices
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('animate-ready');
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    animatedElements.forEach(function(el) { observer.observe(el); });
+})();
+
+// ===================================
+// 2. PAGE LOADER - shows on all devices
+// ===================================
+(function() {
+    var loader = document.querySelector('.page-loader');
+    if (!loader) return;
+
+    function hideLoader() {
+        loader.classList.add('hidden');
+        setTimeout(function() { loader.style.display = 'none'; }, 700);
     }
-    
-    let isMenuOpen = false;
-    
+
+    window.addEventListener('load', function() {
+        setTimeout(hideLoader, 800);
+    });
+
+    // Safety fallback: always hide after 3s
+    setTimeout(hideLoader, 3000);
+})();
+
+// ===================================
+// 3. MOBILE NAVIGATION
+// ===================================
+(function() {
+    var hamburger = document.querySelector('.hamburger');
+    var navMenu = document.querySelector('.nav-menu');
+    var navRight = document.querySelector('.nav-right');
+    var body = document.body;
+    var isMenuOpen = false;
+
+    if (!hamburger || !navMenu) return;
+
     function openMenu() {
         hamburger.classList.add('active');
         navMenu.classList.add('active');
-        navRight.classList.add('active');
+        if (navRight) navRight.classList.add('active');
         body.style.overflow = 'hidden';
         isMenuOpen = true;
     }
-    
+
     function closeMenu() {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
-        navRight.classList.remove('active');
+        if (navRight) navRight.classList.remove('active');
         body.style.overflow = '';
         isMenuOpen = false;
     }
-    
-    function toggleMenu() {
-        if (isMenuOpen) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-    }
-    
+
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
         e.preventDefault();
-        toggleMenu();
+        isMenuOpen ? closeMenu() : openMenu();
     });
-    
-    const menuLinks = navMenu.querySelectorAll('a');
-    menuLinks.forEach(link => {
+
+    navMenu.querySelectorAll('a').forEach(function(link) {
         link.addEventListener('click', closeMenu);
     });
-    
+
     document.addEventListener('click', function(e) {
         if (!isMenuOpen) return;
-        const clickedInsideMenu = navMenu.contains(e.target);
-        const clickedInsideNavRight = navRight.contains(e.target);
-        const clickedHamburger = hamburger.contains(e.target);
-        if (!clickedInsideMenu && !clickedInsideNavRight && !clickedHamburger) {
-            closeMenu();
-        }
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
     });
-    
+
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isMenuOpen) {
-            closeMenu();
-        }
+        if (e.key === 'Escape' && isMenuOpen) closeMenu();
     });
-    
-    let resizeTimer;
+
     window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            if (window.innerWidth > 768 && isMenuOpen) {
-                closeMenu();
-            }
-        }, 250);
+        if (window.innerWidth > 768 && isMenuOpen) closeMenu();
     });
-    
-    console.log('✅ Mobile Nav: Ready!');
 })();
 
 // ===================================
-// 2. SERVICES CAROUSEL - WITH HOVER PAUSE 🎠
+// 4. NAVBAR SCROLL
 // ===================================
 (function() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    const sliderDots = document.querySelectorAll('.slider-dot');
-    const prevArrow = document.querySelector('.slider-arrow-prev');
-    const nextArrow = document.querySelector('.slider-arrow-next');
-    const sliderContainer = document.querySelector('.services-slider');
-    
-    if (serviceCards.length === 0) {
-        console.log('ℹ️ No carousel found on this page');
-        return;
-    }
-    
-    console.log('🎠 Carousel Found! Cards:', serviceCards.length);
-    
-    let currentSlide = 0;
-    const totalSlides = serviceCards.length;
-    let autoplayInterval = null;
-    let userIsHovering = false;
-    
-    function updateSlidePositions() {
-        serviceCards.forEach((card, index) => {
-            card.classList.remove('slide-left', 'slide-center', 'slide-right', 'active');
-            
-            if (index === currentSlide) {
-                card.classList.add('slide-center', 'active');
-            } else if (index < currentSlide) {
-                card.classList.add('slide-left');
-            } else {
-                card.classList.add('slide-right');
-            }
-        });
-        
-        sliderDots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-    }
-    
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateSlidePositions();
-    }
-    
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateSlidePositions();
-    }
-    
-    function startAutoplay() {
-        stopAutoplay();
-        if (!userIsHovering) {
-            autoplayInterval = setInterval(nextSlide, 3000);
-            console.log('▶️ AUTOPLAY STARTED');
+    var navbar = document.getElementById('navbar');
+    if (!navbar) return;
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                navbar.classList.toggle('scrolled', window.scrollY > 100);
+                ticking = false;
+            });
+            ticking = true;
         }
-    }
-    
-    function stopAutoplay() {
-        if (autoplayInterval) {
-            clearInterval(autoplayInterval);
-            autoplayInterval = null;
-        }
-    }
-    
-    function handleMouseEnter() {
-        console.log('🖱️ MOUSE ENTERED - Pausing');
-        userIsHovering = true;
-        stopAutoplay();
-    }
-    
-    function handleMouseLeave() {
-        console.log('🖱️ MOUSE LEFT - Resuming');
-        userIsHovering = false;
-        startAutoplay();
-    }
-    
-    updateSlidePositions();
-    startAutoplay();
-    
-    if (sliderContainer) {
-        sliderContainer.addEventListener('mouseenter', handleMouseEnter);
-        sliderContainer.addEventListener('mouseleave', handleMouseLeave);
-    }
-    
-    serviceCards.forEach((card) => {
-        card.addEventListener('mouseenter', handleMouseEnter);
-        card.addEventListener('mouseleave', handleMouseLeave);
-    });
-    
-    if (prevArrow) {
-        prevArrow.addEventListener('click', function() {
-            stopAutoplay();
-            prevSlide();
-            setTimeout(function() {
-                if (!userIsHovering) startAutoplay();
-            }, 2000);
-        });
-    }
-    
-    if (nextArrow) {
-        nextArrow.addEventListener('click', function() {
-            stopAutoplay();
-            nextSlide();
-            setTimeout(function() {
-                if (!userIsHovering) startAutoplay();
-            }, 2000);
-        });
-    }
-    
-    sliderDots.forEach((dot, index) => {
-        dot.addEventListener('click', function() {
-            stopAutoplay();
-            currentSlide = index;
-            updateSlidePositions();
-            setTimeout(function() {
-                if (!userIsHovering) startAutoplay();
-            }, 2000);
-        });
-    });
-    
-    console.log('✅ Carousel Ready with HOVER PAUSE! 🎠');
+    }, { passive: true });
 })();
 
 // ===================================
-// 3. PAGE LOADER
+// 5. MARQUEE
 // ===================================
-window.addEventListener('load', function() {
-    const loader = document.querySelector('.page-loader');
-    if (loader) {
-        setTimeout(function() {
-            loader.classList.add('hidden');
-            setTimeout(function() {
-                loader.style.display = 'none';
-            }, 600);
-        }, 1000);
-    }
-});
-
-// ===================================
-// 4. NAVIGATION SCROLL
-// ===================================
-const navbar = document.getElementById('navbar');
-if (navbar) {
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-}
-
-// ===================================
-// 5. SCROLL ANIMATIONS
-// ===================================
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
-
-const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .section-animate');
-animatedElements.forEach(function(el) {
-    observer.observe(el);
-});
-
-// ===================================
-// 6. SMOOTH SCROLL
-// ===================================
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// ===================================
-// 7. MARQUEE
-// ===================================
-const marqueeContents = document.querySelectorAll('.marquee-content');
-marqueeContents.forEach(function(content) {
-    const clone = content.cloneNode(true);
+document.querySelectorAll('.marquee-content').forEach(function(content) {
+    var clone = content.cloneNode(true);
     content.parentElement.appendChild(clone);
 });
 
 // ===================================
-// 8. HOMEPAGE CAROUSEL
+// 6. HOME CAROUSEL - with touch pause support
 // ===================================
-const carouselTrack = document.querySelector('.carousel-track');
-const dots = document.querySelectorAll('.dot');
-let carouselIndex = 0;
+(function() {
+    var track = document.querySelector('.carousel-track');
+    var dots = document.querySelectorAll('.dot');
+    if (!track) return;
 
-if (dots.length > 0) {
+    var idx = 0;
+
+    // Pause/resume helpers using CSS class (works on all devices)
+    function pause() { track.classList.add('paused'); }
+    function resume() { track.classList.remove('paused'); }
+
+    // Auto-advance dots
     setInterval(function() {
-        carouselIndex = (carouselIndex + 1) % 4;
-        dots.forEach(function(dot, i) {
-            dot.classList.toggle('active', i === carouselIndex);
-        });
+        idx = (idx + 1) % 4;
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
     }, 3000);
-    
+
+    // Dot clicks
     dots.forEach(function(dot, index) {
         dot.addEventListener('click', function() {
-            carouselIndex = index;
-            dots.forEach(function(d, i) {
-                d.classList.toggle('active', i === index);
-            });
-            if (carouselTrack) {
-                carouselTrack.style.animation = 'none';
-                carouselTrack.style.transform = 'translateX(-' + (index * 330) + 'px)';
-                setTimeout(function() {
-                    carouselTrack.style.animation = '';
-                }, 3000);
-            }
+            idx = index;
+            dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
         });
     });
-}
+
+    // ✅ Desktop hover pause
+    track.addEventListener('mouseenter', pause);
+    track.addEventListener('mouseleave', resume);
+
+    // ✅ Mobile touch pause - pause on touch start, resume on touch end/cancel
+    track.addEventListener('touchstart', pause, { passive: true });
+    track.addEventListener('touchend', resume, { passive: true });
+    track.addEventListener('touchcancel', resume, { passive: true });
+})();
 
 // ===================================
-// 9. STATS COUNTER - FIXED! ✅
+// 7. STATS COUNTER
 // ===================================
-function animateCounter(element, target, suffix) {
-    suffix = suffix || '';
-    let current = 0;
-    const increment = target / 50;
-    const timer = setInterval(function() {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target + suffix;
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current) + suffix;
-        }
-    }, 40);
-}
+(function() {
+    var statsSection = document.querySelector('.stats-section');
+    if (!statsSection) return;
 
-const statsObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-            const statCards = entry.target.querySelectorAll('.stat-card h3');
-            statCards.forEach(function(card) {
-                const text = card.textContent.trim();
-                
-                // ✅ FIX: Check for 150 FIRST (before checking for 50)
-                // This prevents "150" from matching "50"
-                if (text.includes('150')) {
-                    console.log('✅ Animating to 150+');
-                    animateCounter(card, 150, '+');
-                } else if (text.includes('50')) {
-                    console.log('✅ Animating to 50+');
-                    animateCounter(card, 50, '+');
-                } else if (text.includes('98')) {
-                    console.log('✅ Animating to 98%');
-                    animateCounter(card, 98, '%');
-                }
+    function animateCounter(el, target, suffix) {
+        var current = 0;
+        var inc = target / 50;
+        var timer = setInterval(function() {
+            current += inc;
+            if (current >= target) {
+                el.textContent = target + suffix;
+                clearInterval(timer);
+            } else {
+                el.textContent = Math.floor(current) + suffix;
+            }
+        }, 40);
+    }
+
+    var done = false;
+    var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting && !done) {
+            done = true;
+            statsSection.querySelectorAll('.stat-card h3').forEach(function(card) {
+                var t = card.textContent.trim();
+                if (t.includes('150')) animateCounter(card, 150, '+');
+                else if (t.includes('50')) animateCounter(card, 50, '+');
+                else if (t.includes('98')) animateCounter(card, 98, '%');
             });
-            statsObserver.unobserve(entry.target);
         }
+    }, { threshold: 0.5 });
+    obs.observe(statsSection);
+})();
+
+// ===================================
+// 8. SERVICES SLIDER
+// ===================================
+(function() {
+    var cards = document.querySelectorAll('.service-card');
+    if (cards.length === 0) return;
+
+    var dots = document.querySelectorAll('.slider-dot');
+    var prev = document.querySelector('.slider-arrow-prev');
+    var next = document.querySelector('.slider-arrow-next');
+    var container = document.querySelector('.services-slider');
+    var current = 0;
+    var total = cards.length;
+    var interval = null;
+    var hovering = false;
+
+    function update() {
+        cards.forEach(function(c, i) {
+            c.classList.remove('slide-left', 'slide-center', 'slide-right', 'active');
+            if (i === current) c.classList.add('slide-center', 'active');
+            else if (i < current) c.classList.add('slide-left');
+            else c.classList.add('slide-right');
+        });
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    }
+
+    function go(n) { current = ((n % total) + total) % total; update(); }
+    function start() { if (!hovering) interval = setInterval(function() { go(current + 1); }, 3000); }
+    function stop() { clearInterval(interval); interval = null; }
+
+    update(); start();
+
+    if (container) {
+        container.addEventListener('mouseenter', function() { hovering = true; stop(); });
+        container.addEventListener('mouseleave', function() { hovering = false; start(); });
+    }
+    if (prev) prev.addEventListener('click', function() { stop(); go(current - 1); setTimeout(function() { if (!hovering) start(); }, 2000); });
+    if (next) next.addEventListener('click', function() { stop(); go(current + 1); setTimeout(function() { if (!hovering) start(); }, 2000); });
+    dots.forEach(function(d, i) {
+        d.addEventListener('click', function() { stop(); go(i); setTimeout(function() { if (!hovering) start(); }, 2000); });
     });
-}, { threshold: 0.5 });
-
-const statsSection = document.querySelector('.stats-section');
-if (statsSection) {
-    statsObserver.observe(statsSection);
-}
+})();
 
 // ===================================
-// 10. BACK TO TOP
+// 9. BACK TO TOP
 // ===================================
-const backToTop = document.createElement('button');
-backToTop.className = 'back-to-top';
-backToTop.innerHTML = '↑';
-backToTop.setAttribute('aria-label', 'Back to top');
-document.body.appendChild(backToTop);
-
-window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 300) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
-    }
-});
-
-backToTop.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+(function() {
+    var btn = document.createElement('button');
+    btn.className = 'back-to-top';
+    btn.innerHTML = '↑';
+    btn.setAttribute('aria-label', 'Back to top');
+    document.body.appendChild(btn);
+    window.addEventListener('scroll', function() {
+        btn.classList.toggle('visible', window.pageYOffset > 300);
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
 
 // ===================================
-// 11. ACTIVE NAV LINK
+// 10. ACTIVE NAV LINK
 // ===================================
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-const navLinks = document.querySelectorAll('.nav-link');
+(function() {
+    var page = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+        if (link.getAttribute('href') === page) link.classList.add('active');
+    });
+})();
 
-navLinks.forEach(function(link) {
-    const linkPage = link.getAttribute('href');
-    if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
-        link.classList.add('active');
-    }
+// ===================================
+// 11. SMOOTH SCROLL ANCHORS
+// ===================================
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var t = document.querySelector(this.getAttribute('href'));
+        if (t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' });
+    });
 });
 
 console.log('✅ ALL FEATURES LOADED!');
-console.log('%c Stryde Coaching Ready! ', 'background: #CBB484; color: #00180A; font-size: 18px; font-weight: bold; padding: 10px;');
