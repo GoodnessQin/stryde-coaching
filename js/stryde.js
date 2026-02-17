@@ -174,9 +174,24 @@ document.querySelectorAll('.marquee-content').forEach(function(content) {
     var statsSection = document.querySelector('.stats-section');
     if (!statsSection) return;
 
+    var cards = statsSection.querySelectorAll('.stat-card h3');
+
+    // Store the target values and suffixes, then reset display to 0
+    var targets = [];
+    cards.forEach(function(card) {
+        var t = card.textContent.trim();
+        if (t.includes('150'))      targets.push({ el: card, target: 150, suffix: '+' });
+        else if (t.includes('50'))  targets.push({ el: card, target: 50,  suffix: '+' });
+        else if (t.includes('98'))  targets.push({ el: card, target: 98,  suffix: '%' });
+        else                        targets.push({ el: card, target: 0,   suffix: ''  });
+
+        // Reset to 0 immediately so final number doesn't flash
+        card.textContent = '0';
+    });
+
     function animateCounter(el, target, suffix) {
         var current = 0;
-        var inc = target / 50;
+        var inc = target / 60;
         var timer = setInterval(function() {
             current += inc;
             if (current >= target) {
@@ -185,18 +200,15 @@ document.querySelectorAll('.marquee-content').forEach(function(content) {
             } else {
                 el.textContent = Math.floor(current) + suffix;
             }
-        }, 40);
+        }, 30);
     }
 
     var done = false;
     var obs = new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting && !done) {
             done = true;
-            statsSection.querySelectorAll('.stat-card h3').forEach(function(card) {
-                var t = card.textContent.trim();
-                if (t.includes('150')) animateCounter(card, 150, '+');
-                else if (t.includes('50')) animateCounter(card, 50, '+');
-                else if (t.includes('98')) animateCounter(card, 98, '%');
+            targets.forEach(function(item) {
+                animateCounter(item.el, item.target, item.suffix);
             });
         }
     }, { threshold: 0.5 });
