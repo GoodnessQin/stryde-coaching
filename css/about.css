@@ -416,10 +416,12 @@
         margin: 0 auto;
         position: relative;
     }
+     
 
     .about-main-image {
-        width: 100%;
+       width: 280px;
         height: 350px;
+        margin: 0 auto 30px;
     }
 
     /* ⭐ SUCCESS CARD - STAYS ABSOLUTE (SaaS Standard) ⭐ */
