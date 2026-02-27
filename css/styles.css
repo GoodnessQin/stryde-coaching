@@ -682,6 +682,7 @@ body {
     letter-spacing: 1.5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .btn-tertiary:hover {
