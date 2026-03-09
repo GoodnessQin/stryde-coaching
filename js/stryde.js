@@ -12,12 +12,10 @@ console.log('✅ Stryde JS Loading...');
     var animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .section-animate');
     if (animatedElements.length === 0) return;
 
-    // Mark all elements ready for animation (hide them)
     animatedElements.forEach(function(el) {
         el.classList.add('animate-ready');
     });
 
-    // Reveal elements as they scroll into view - on ALL devices
     var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
@@ -32,7 +30,7 @@ console.log('✅ Stryde JS Loading...');
 })();
 
 // ===================================
-// 2. PAGE LOADER - shows on all devices
+// 2. PAGE LOADER
 // ===================================
 (function() {
     var loader = document.querySelector('.page-loader');
@@ -47,7 +45,6 @@ console.log('✅ Stryde JS Loading...');
         setTimeout(hideLoader, 800);
     });
 
-    // Safety fallback: always hide after 3s
     setTimeout(hideLoader, 3000);
 })();
 
@@ -130,41 +127,135 @@ document.querySelectorAll('.marquee-content').forEach(function(content) {
 });
 
 // ===================================
-// 6. HOME CAROUSEL - with touch pause support
+// 6. HOME CAROUSEL - fully JS-driven
+//    Supports: auto-scroll, hover pause, touch pause, arrow nav
 // ===================================
 (function() {
     var track = document.querySelector('.carousel-track');
     var dots = document.querySelectorAll('.dot');
+    var prevBtn = document.querySelector('.carousel-arrow-prev');
+    var nextBtn = document.querySelector('.carousel-arrow-next');
     if (!track) return;
 
-    var idx = 0;
+    // Remove CSS animation — JS drives all movement now
+    track.style.animation = 'none';
+    track.style.willChange = 'transform';
 
-    // Pause/resume helpers using CSS class (works on all devices)
-    function pause() { track.classList.add('paused'); }
-    function resume() { track.classList.remove('paused'); }
+    var CARD_COUNT = 4;     // number of original (non-duplicate) cards
+    var GAP = 30;           // must match the CSS gap on .carousel-track
+    var SPEED = 0.5;        // px per frame for auto-scroll
+    var SNAP_EASE = 0.15;   // easing factor for arrow snapping (0–1, lower = smoother)
 
-    // Auto-advance dots
+    var offset = 0;         // current rendered position in px
+    var targetOffset = 0;   // destination for arrow snapping
+    var isPaused = false;
+    var isSnapping = false;
+    var dotIdx = 0;
+
+    function getCardStep() {
+        var card = track.querySelector('.carousel-card');
+        if (!card) return 330;
+        return card.getBoundingClientRect().width + GAP;
+    }
+
+    function getLoopWidth() {
+        return getCardStep() * CARD_COUNT;
+    }
+
+    function applyOffset(val) {
+        track.style.transform = 'translateX(' + (-val) + 'px)';
+    }
+
+    function tick() {
+        var loopWidth = getLoopWidth();
+
+        if (isSnapping) {
+            var diff = targetOffset - offset;
+            if (Math.abs(diff) < 0.5) {
+                offset = targetOffset;
+                isSnapping = false;
+                // Resume auto-scroll unless hovered
+                if (!track.matches(':hover')) {
+                    isPaused = false;
+                }
+            } else {
+                offset += diff * SNAP_EASE;
+            }
+        } else if (!isPaused) {
+            offset += SPEED;
+            targetOffset = offset;
+        }
+
+        // Seamless loop
+        if (offset >= loopWidth) {
+            offset -= loopWidth;
+            targetOffset -= loopWidth;
+        }
+        if (offset < 0) {
+            offset += loopWidth;
+            targetOffset += loopWidth;
+        }
+
+        applyOffset(offset);
+        requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+
+    // ── Pause / Resume ──────────────────────────────
+    function pause() { isPaused = true; }
+    function resume() {
+        if (!isSnapping) isPaused = false;
+    }
+
+    track.addEventListener('mouseenter', pause);
+    track.addEventListener('mouseleave', resume);
+
+    track.addEventListener('touchstart', pause, { passive: true });
+    track.addEventListener('touchend', function() {
+        setTimeout(resume, 800);
+    }, { passive: true });
+    track.addEventListener('touchcancel', resume, { passive: true });
+
+    // ── Arrow navigation ─────────────────────────────
+    function nudge(direction) {
+        var step = getCardStep();
+        // Snap to nearest card boundary, then move one step in the given direction
+        var snappedBase = Math.round(offset / step) * step;
+        targetOffset = snappedBase + direction * step;
+        isSnapping = true;
+        isPaused = true;
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            nudge(-1);
+            dotIdx = (dotIdx - 1 + CARD_COUNT) % CARD_COUNT;
+            dots.forEach(function(d, i) { d.classList.toggle('active', i === dotIdx); });
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            nudge(1);
+            dotIdx = (dotIdx + 1) % CARD_COUNT;
+            dots.forEach(function(d, i) { d.classList.toggle('active', i === dotIdx); });
+        });
+    }
+
+    // ── Dot auto-advance ─────────────────────────────
     setInterval(function() {
-        idx = (idx + 1) % 4;
-        dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+        dotIdx = (dotIdx + 1) % CARD_COUNT;
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === dotIdx); });
     }, 3000);
 
-    // Dot clicks
     dots.forEach(function(dot, index) {
         dot.addEventListener('click', function() {
-            idx = index;
+            dotIdx = index;
             dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
         });
     });
 
-    // ✅ Desktop hover pause
-    track.addEventListener('mouseenter', pause);
-    track.addEventListener('mouseleave', resume);
-
-    // ✅ Mobile touch pause - pause on touch start, resume on touch end/cancel
-    track.addEventListener('touchstart', pause, { passive: true });
-    track.addEventListener('touchend', resume, { passive: true });
-    track.addEventListener('touchcancel', resume, { passive: true });
 })();
 
 // ===================================
@@ -176,7 +267,6 @@ document.querySelectorAll('.marquee-content').forEach(function(content) {
 
     var cards = statsSection.querySelectorAll('.stat-card h3');
 
-    // Store the target values and suffixes, then reset display to 0
     var targets = [];
     cards.forEach(function(card) {
         var t = card.textContent.trim();
@@ -185,7 +275,6 @@ document.querySelectorAll('.marquee-content').forEach(function(content) {
         else if (t.includes('98'))  targets.push({ el: card, target: 98,  suffix: '%' });
         else                        targets.push({ el: card, target: 0,   suffix: ''  });
 
-        // Reset to 0 immediately so final number doesn't flash
         card.textContent = '0';
     });
 

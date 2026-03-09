@@ -144,7 +144,7 @@ body {
 }
 
 /* ===================================
-   HERO SECTION - CENTERED WITH SERIF FONT
+   HERO SECTION
    =================================== */
 .hero {
     position: relative;
@@ -177,31 +177,31 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Slight overlay for text readability */
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .hero-content {
     position: relative;
     z-index: 1;
     max-width: 1000px;
-     padding: 0 40px; /* Added 80px top padding */
+    padding: 0 40px;
     padding-top: 50px;
     animation: fadeInUp 1.5s ease;
 }
 
-
 .hero-subtitle {
     max-width: 900px;
     color: var(--white);
-    font-size: 16px; /* Increased from 14px for better readability */
+    font-size: 16px;
     font-weight: 300;
-    letter-spacing: 0.5px; /* Reduced from 2px */
+    letter-spacing: 0.5px;
     margin-bottom: 30px;
     opacity: 0.95;
-    line-height: 1.7; /* Added for better line spacing */
+    line-height: 1.7;
 }
+
 .hero-title {
-     padding: 80px 40px 0 40px; /* Added 80px top padding */
+    padding: 80px 40px 0 40px;
     font-family: 'Playfair Display', 'Georgia', serif;
     font-size: 50px;
     font-weight: 400;
@@ -278,21 +278,13 @@ body {
 }
 
 @keyframes marquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 @keyframes marqueeReverse {
-    0% {
-        transform: translateX(-50%);
-    }
-    100% {
-        transform: translateX(0);
-    }
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
 }
 
 /* ===================================
@@ -482,6 +474,7 @@ body {
 
 /* ===================================
    WHO IS THIS FOR SECTION - CAROUSEL
+   JS drives all movement; no CSS animation on .carousel-track
    =================================== */
 .who-section {
     padding: 100px 0;
@@ -506,20 +499,26 @@ body {
     letter-spacing: 2px;
 }
 
-.carousel-container {
-    overflow: hidden;
+/* Wrapper holds the arrows + the scrolling container */
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
     margin-bottom: 40px;
-    padding: 20px 0;
 }
 
+.carousel-container {
+    overflow: hidden;
+    padding: 20px 0;
+    flex: 1;
+    /* no margin-bottom here — moved to .carousel-wrapper */
+}
+
+/* Track: NO animation property — JS sets transform directly */
 .carousel-track {
     display: flex;
     gap: 30px;
-    animation: carouselScroll 40s linear infinite;
-}
-
-.carousel-track.paused {
-    animation-play-state: paused !important;
+    /* animation removed — controlled by JS requestAnimationFrame */
 }
 
 .carousel-card {
@@ -530,7 +529,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .carousel-card:hover {
@@ -567,6 +566,40 @@ body {
     color: var(--black);
 }
 
+/* ── Arrows ──────────────────────────────────────── */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: var(--dark-green);
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+}
+
+.carousel-arrow:hover {
+    background-color: var(--gold);
+    color: var(--dark-green);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-arrow-prev { left: -25px; }
+.carousel-arrow-next { right: -25px; }
+
+/* ── Dots ─────────────────────────────────────────── */
 .carousel-dots {
     display: flex;
     justify-content: center;
@@ -590,15 +623,6 @@ body {
 .dot:hover {
     background-color: var(--gold);
     opacity: 0.8;
-}
-
-@keyframes carouselScroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-4 * (300px + 30px)));
-    }
 }
 
 /* ===================================
@@ -729,6 +753,9 @@ body {
 
 .footer-column ul li {
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .footer-column ul li a,
@@ -737,12 +764,6 @@ body {
     text-decoration: none;
     font-size: 14px;
     transition: color 0.3s ease;
-}
-
-.footer-column ul li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .footer-column ul li a:hover {
@@ -787,14 +808,8 @@ body {
    ANIMATIONS
    =================================== */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .section-animate {
@@ -824,209 +839,66 @@ body {
    RESPONSIVE DESIGN
    =================================== */
 @media (max-width: 1024px) {
-    .nav-menu {
-        gap: 25px;
-    }
-    
-    .hero-title {
-        font-size: 55px;
-    }
-    
-    .testimonials-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .services-section {
-        min-height: 80vh;
-        padding: 80px 0 250px 0;
-        margin-bottom: -200px;
-    }
-    
-    .services-content h2 {
-        font-size: 60px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .meet-container {
-        gap: 40px;
-    }
-    
-    .footer-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .nav-menu { gap: 25px; }
+    .hero-title { font-size: 55px; }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-section { min-height: 80vh; padding: 80px 0 250px 0; margin-bottom: -200px; }
+    .services-content h2 { font-size: 60px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .meet-container { gap: 40px; }
+    .footer-container { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-    .container {
-        padding: 0 20px;
-    }
-    
-    .nav-menu,
-    .nav-right {
-        display: none;
-    }
-    
-    .hamburger {
-        display: flex;
-    }
-    
-    .mobile-only {
-        display: block !important;
-    }
-    
-    .hero-title {
-        font-size: 42px;
-    }
-    
-    .hero-subtitle {
-        font-size: 12px;
-    }
-    
-    .hero-tagline {
-        font-size: 15px;
-    }
-    
-    .testimonials-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .services-section {
-        min-height: 70vh;
-        padding: 80px 0 200px 0;
-        margin-bottom: -150px;
-    }
-    
-    .services-content h2 {
-        font-size: 45px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .stat-card {
-        padding: 40px 20px;
-    }
-    
-    .section-title {
-        font-size: 35px;
-    }
-
-    .section-subtitle {
-        font-size: 14px;
-        padding: 0 20px;
-    }
-
-    .carousel-track {
-        gap: 20px !important;
-        animation: carouselScrollMobile 30s linear infinite !important;
-    }
+    .container { padding: 0 20px; }
+    .nav-menu, .nav-right { display: none; }
+    .hamburger { display: flex; }
+    .mobile-only { display: block !important; }
+    .hero-title { font-size: 42px; }
+    .hero-subtitle { font-size: 12px; }
+    .hero-tagline { font-size: 15px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .services-section { min-height: 70vh; padding: 80px 0 200px 0; margin-bottom: -150px; }
+    .services-content h2 { font-size: 45px; }
+    .stats-grid { grid-template-columns: 1fr; gap: 20px; }
+    .stat-card { padding: 40px 20px; }
+    .section-title { font-size: 35px; }
+    .section-subtitle { font-size: 14px; padding: 0 20px; }
 
     .carousel-card {
         min-width: 280px !important;
         max-width: 280px !important;
         flex-shrink: 0 !important;
     }
+    .card-image { height: 200px; }
+    .carousel-card h3 { font-size: 16px; padding: 15px 15px 10px; }
+    .carousel-card p { font-size: 13px; padding: 0 15px 15px; }
+    .carousel-dots { display: none; }
 
-    .card-image {
-        height: 200px;
-    }
+    .carousel-arrow { width: 38px; height: 38px; font-size: 24px; }
+    .carousel-arrow-prev { left: -5px; }
+    .carousel-arrow-next { right: -5px; }
 
-    .carousel-card h3 {
-        font-size: 16px;
-        padding: 15px 15px 10px;
-    }
-
-    .carousel-card p {
-        font-size: 13px;
-        padding: 0 15px 15px;
-    }
-
-    .carousel-dots {
-        display: none;
-    }
-
-    @keyframes carouselScrollMobile {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-4 * (280px + 20px)));
-        }
-    }
-    
-    .meet-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .meet-content h2 {
-        font-size: 45px;
-    }
-    
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
+    .meet-container { grid-template-columns: 1fr; gap: 40px; }
+    .meet-content h2 { font-size: 45px; }
+    .footer-container { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 36px;
-    }
-    
-    .hero-tagline {
-        font-size: 14px;
-    }
-
-    .services-content h2 {
-        font-size: 40px;
-    }
-    
-    .meet-content h2 {
-        font-size: 35px;
-    }
-
-    .section-title {
-        font-size: 28px;
-    }
-
-    .section-subtitle {
-        font-size: 12px;
-    }
-
-    .carousel-track {
-        gap: 15px !important;
-        animation: carouselScrollSmall 25s linear infinite !important;
-    }
+    .hero-title { font-size: 36px; }
+    .hero-tagline { font-size: 14px; }
+    .services-content h2 { font-size: 40px; }
+    .meet-content h2 { font-size: 35px; }
+    .section-title { font-size: 28px; }
+    .section-subtitle { font-size: 12px; }
 
     .carousel-card {
         min-width: 260px !important;
         max-width: 260px !important;
     }
+    .card-image { height: 180px; }
+    .carousel-card h3 { font-size: 15px; }
+    .carousel-card p { font-size: 12px; }
 
-    .card-image {
-        height: 180px;
-    }
-
-    .carousel-card h3 {
-        font-size: 15px;
-    }
-
-    .carousel-card p {
-        font-size: 12px;
-    }
-
-    @keyframes carouselScrollSmall {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-4 * (260px + 15px)));
-        }
-    }
+    .carousel-arrow { width: 32px; height: 32px; font-size: 20px; }
 }

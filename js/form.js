@@ -8,7 +8,7 @@
 // STEP 1: Replace this URL with your Google Apps Script Web App URL
 // After deploying your script, you'll get a URL like:
 // https://script.google.com/macros/s/AKfycbz.../exec
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOBlrVe9f2peZwjfT2uOr7itA2bjtCa2X2YUXtO0jyhFOBsK9DJtXrjyeAuIkrikcJFw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzv7BMSqKxNJO-hoqXuyUd5jHgosf0g_Dh-g5hD_wM45MBZnrHBk6cbGLmZ0x79VEJGCQ/exec';
 
 // Get form elements
 const contactForm = document.getElementById('contactForm');
