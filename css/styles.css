@@ -352,8 +352,8 @@ body {
 }
 
 .btn-secondary {
-    background-color: var(--dark-green);
-    color: var(--gold);
+    background-color: var(--gold);
+    color: var(--dark-green);
     border: none;
     padding: 15px 40px;
     font-size: 14px;
@@ -361,13 +361,15 @@ body {
     letter-spacing: 1.5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: block;
+    display: inline-block;       /* ← was: block */
     margin: 0 auto;
+    text-decoration: none;       /* ← add this */
+
 }
 
 .btn-secondary:hover {
-    background-color: var(--gold);
-    color: var(--dark-green);
+    background-color: var(--dark-green);
+    color: var(--gold);
     transform: translateY(-2px);
 }
 
