@@ -54,16 +54,17 @@
 }
 
 .services-hero .hero-subtitle {
-    font-size: 18px;
-    color: var(--gold);
-    letter-spacing: 2px;
+    font-size: 22px;
+    font-weight: 200;
+    color: var(--white);
+    letter-spacing: 1px;
 }
 
 .service-tagline {
     max-width: 650px;
     font-size: 14px;
     margin-bottom: 40px;
-    color: var(--white);
+    color: var(--gold);
     font-style: italic;
 }
 
