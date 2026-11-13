@@ -48,8 +48,8 @@ export default function Refer() {
         <div className="refer-hero-content">
           <h1 className="refer-title scale-in">Your Network Could Change Someone's Career!</h1>
           <p className="refer-subtitle scale-in">
-            Know Someone Who Needs A Little Career Direction? Don't Keep Us A Secret! Apply For Your
-            Referral Code And Help Someone Find Their Next Stride.
+            Know someone who needs a little career direction? Don't keep us a secret! Apply for your
+            referral code and help someone find their next stryde.
           </p>
 
           <form className="refer-form fade-in" onSubmit={onSubmit} noValidate>
