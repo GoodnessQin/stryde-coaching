@@ -1,0 +1,9 @@
+/* Added with the "REFER SOMEONE" nav link: keeps the 5-link menu on one line
+   on small laptops/tablets (769px-1100px). No effect at other widths. */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .nav-link { white-space: nowrap; }
+    .nav-menu { gap: 18px; }
+    .nav-right { gap: 18px; }
+    .btn-contact { white-space: nowrap; padding: 10px 18px; }
+    .social-icons { gap: 6px; }
+}

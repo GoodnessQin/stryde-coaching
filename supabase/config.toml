@@ -1,0 +1,8 @@
+# These two functions are public website endpoints (referral sign-up and the
+# contact form). New Supabase API keys (sb_publishable_...) are not JWTs, so the
+# platform's JWT check must be off or every call fails with 401 "Invalid JWT".
+[functions.create-referral]
+verify_jwt = false
+
+[functions.submit-contact]
+verify_jwt = false
