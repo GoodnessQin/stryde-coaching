@@ -46,7 +46,7 @@ export default function Refer() {
       <section className="refer-hero">
         <div className="refer-hero-bg"></div>
         <div className="refer-hero-content">
-          <h1 className="refer-title scale-in">Your referral can change someone’s career trajectory—and their life</h1>
+          <h1 className="refer-title scale-in">Your referral can change someone’s career trajectory, and their life</h1>
           <p className="refer-subtitle scale-in">
             One introduction can change a career. Grab your Stryde referral code today and help someone make a move they'll thank you for.
           </p>
