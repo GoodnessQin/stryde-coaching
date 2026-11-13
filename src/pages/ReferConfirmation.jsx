@@ -88,7 +88,7 @@ export default function ReferConfirmation() {
 
           <p className="refer-confirm-note fade-in">
             When someone books a discovery call through your link, we'll know they came from you.
-            Thank you for helping someone find their next stride.
+            Thank you for helping someone find their next stryde.
           </p>
           <p className="refer-message" role="status">
             {copied ? 'Link copied to your clipboard.' : 'We’ve also sent your link to your email.'}
