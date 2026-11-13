@@ -51,7 +51,13 @@ Deno.serve(async (req) => {
     if (Date.now() - last > RESEND_COOLDOWN_MS) {
       try {
         const { html, text } = referralEmail(link, siteUrl());
-        await sendEmail({ to: email, subject: "You're In! Your Stryde Coaching referral link", html, text });
+        await sendEmail({
+          to: email,
+          subject: 'Your Stryde Coaching referral link',
+          html,
+          text,
+          replyTo: Deno.env.get('REPLY_TO_EMAIL') || 'hello@strydecoachings.com',
+        });
         emailSent = true;
         await db.from('referrers').update({ last_email_sent_at: new Date().toISOString() }).eq('id', referrer.id);
       } catch (mailErr) {
