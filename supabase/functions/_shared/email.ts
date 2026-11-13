@@ -68,14 +68,8 @@ export function referralEmail(link: string, siteUrl: string) {
     .map(([label, href]) => `<a href="${href}" style="display:inline-block;margin:4px;padding:8px 14px;border:1px solid ${GOLD};color:${DARK};font-family:Arial,sans-serif;font-size:13px;text-decoration:none;">${label}</a>`)
     .join('');
 
-  // Same design as before. Small additions that make it read as a personal,
-  // transactional email (greeting, sign-off, reply prompt) which helps Gmail
-  // file it in Primary rather than Promotions.
   const html = layout(`
-    <tr><td style="padding:40px 40px 0;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#000;">
-      Hi there,
-    </td></tr>
-    <tr><td style="padding:24px 40px 20px;text-align:center;">
+    <tr><td style="padding:48px 40px 20px;text-align:center;">
       <h1 style="margin:0 0 24px;font-family:Georgia,'Times New Roman',serif;font-weight:normal;font-size:44px;color:#000;">You're In!</h1>
       <p style="margin:0 auto 32px;max-width:440px;font-family:Arial,sans-serif;font-size:16px;line-height:1.6;color:#000;">
         Your personal referral link is ready. Share it with friends, family, colleagues, and anyone who could use a little career direction.
@@ -86,29 +80,16 @@ export function referralEmail(link: string, siteUrl: string) {
       <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:13px;color:#555;">Share it in one tap:</p>
       <div>${shareCells}</div>
     </td></tr>
-    <tr><td style="padding:12px 40px 8px;text-align:center;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;color:#666;">
+    <tr><td style="padding:12px 40px 40px;text-align:center;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;color:#666;">
       When someone books a discovery call through your link, we'll know they came from you. Thank you for helping someone find their next stride.
-    </td></tr>
-    <tr><td style="padding:16px 40px 40px;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#000;">
-      If you have any questions, just reply to this email.<br><br>
-      Warm regards,<br>Chiamaka<br>Stryde Coaching
     </td></tr>`, siteUrl);
 
-  const text = `Hi there,
-
-You're In!
+  const text = `You're In!
 
 Your personal referral link is ready. Share it with friends, family, colleagues, and anyone who could use a little career direction.
 
-Your referral link:
 ${link}
 
-When someone books a discovery call through your link, we'll know they came from you. Thank you for helping someone find their next stride.
-
-If you have any questions, just reply to this email.
-
-Warm regards,
-Chiamaka
 Stryde Coaching`;
   return { html, text };
 }

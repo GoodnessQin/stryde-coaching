@@ -8,14 +8,24 @@ import useScrollAnimations from '../hooks/useScrollAnimations.js';
 import { normalizeCode, referralLink } from '../lib/referral.js';
 
 const SHARE_TEXT =
-  'I’ve been working with Stryde Coaching and thought you might find it helpful. Book a free 30-minute discovery call here:';
+  'I thought you might find Stryde Coaching helpful. Book a free 30-minute discovery call here:';
+
+// Same one-tap share options as the "You're In!" email
+function shareLinks(link) {
+  const enc = encodeURIComponent;
+  return [
+    { label: 'WhatsApp', icon: 'fa-brands fa-whatsapp', href: `https://wa.me/?text=${enc(`${SHARE_TEXT} ${link}`)}` },
+    { label: 'LinkedIn', icon: 'fa-brands fa-linkedin-in', href: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(link)}` },
+    { label: 'X / Twitter', icon: 'fa-brands fa-x-twitter', href: `https://twitter.com/intent/tweet?text=${enc(SHARE_TEXT)}&url=${enc(link)}` },
+    { label: 'Email', icon: 'fa-regular fa-envelope', href: `mailto:?subject=${enc('A coach I think you should meet')}&body=${enc(`${SHARE_TEXT}\n\n${link}`)}` },
+  ];
+}
 
 export default function ReferConfirmation() {
   useScrollAnimations();
   const [params] = useSearchParams();
   const code = normalizeCode(params.get('code'));
-  const [status, setStatus] = useState('');
-  const [showLink, setShowLink] = useState(false);
+  const [copied, setCopied] = useState(false);
   const inputRef = useRef(null);
   const timer = useRef(null);
 
@@ -24,33 +34,16 @@ export default function ReferConfirmation() {
   if (!code) return <Navigate to="/refer" replace />;
   const link = referralLink(code);
 
-  const flash = (text) => {
-    setStatus(text);
-    clearTimeout(timer.current);
-    timer.current = setTimeout(() => setStatus(''), 4000);
-  };
-
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(link);
-      flash('Link copied to your clipboard.');
     } catch {
       inputRef.current?.select();
-      flash('Press Ctrl/Cmd + C to copy your link.');
+      document.execCommand?.('copy');
     }
-    setShowLink(true);
-  };
-
-  const share = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'Stryde Coaching', text: SHARE_TEXT, url: link });
-        return;
-      } catch (err) {
-        if (err?.name === 'AbortError') return; // user closed the share sheet
-      }
-    }
-    copy();
+    setCopied(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), 2500);
   };
 
   return (
@@ -59,25 +52,46 @@ export default function ReferConfirmation() {
       <Navbar solid />
 
       <section className="refer-confirm">
+        <div className="refer-confirm-watermark" aria-hidden="true"></div>
+
         <div className="refer-hero-content">
           <h1 className="refer-title scale-in">You're In!</h1>
           <p className="refer-subtitle fade-in">
             Your personal referral link is ready. Share it with friends, family, colleagues, and anyone
             who could use a little career direction.
           </p>
-          <button type="button" className="refer-btn fade-in" onClick={share}>
-            <span>SHARE REFERRAL LINK</span>
-            <i className="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
-          </button>
 
-          {showLink && (
-            <div className="refer-link-box">
-              <input ref={inputRef} readOnly value={link} onFocus={(e) => e.target.select()} aria-label="Your referral link" />
-              <button type="button" onClick={copy}>Copy</button>
-            </div>
-          )}
+          <p className="refer-confirm-label first fade-in">Copy and share your link:</p>
+          <div className="refer-link-box fade-in">
+            <input
+              ref={inputRef}
+              readOnly
+              value={link}
+              onFocus={(e) => e.target.select()}
+              aria-label="Your referral link"
+            />
+            <button type="button" onClick={copy}>
+              <i className={copied ? 'fa-solid fa-check' : 'fa-regular fa-copy'} aria-hidden="true"></i>
+              {copied ? 'Copied' : 'Copy'}
+            </button>
+          </div>
+
+          <p className="refer-confirm-label fade-in">Share it in one tap:</p>
+          <div className="refer-share-row fade-in">
+            {shareLinks(link).map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="refer-share-btn">
+                <i className={s.icon} aria-hidden="true"></i>
+                {s.label}
+              </a>
+            ))}
+          </div>
+
+          <p className="refer-confirm-note fade-in">
+            When someone books a discovery call through your link, we'll know they came from you.
+            Thank you for helping someone find their next stride.
+          </p>
           <p className="refer-message" role="status">
-            {status || 'We’ve also sent your link to your email.'}
+            {copied ? 'Link copied to your clipboard.' : 'We’ve also sent your link to your email.'}
           </p>
         </div>
       </section>

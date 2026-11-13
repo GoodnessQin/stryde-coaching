@@ -161,14 +161,32 @@
 
 /* ---------- Confirmation ---------- */
 .refer-confirm {
+    position: relative;
+    overflow: hidden;
     min-height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 170px 20px 90px;
-    background: var(--white);
+    background: #FAF8F5;              /* page background colour */
 }
+
+/* Large faint Stryde logo behind the content */
+.refer-confirm-watermark {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 40px);            /* nudged down to sit under the navbar area */
+    transform: translate(-50%, -50%);
+    width: 600px;                     /* logo size */
+    max-width: 90vw;
+    aspect-ratio: 557 / 529;
+    background: url('/assets/images/stryde-watermark.png') center / contain no-repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.refer-confirm .refer-hero-content { position: relative; z-index: 1; }
 
 .refer-confirm .refer-title {
     color: #000;
@@ -177,18 +195,25 @@
 .refer-confirm .refer-subtitle {
     color: #000;
     max-width: 590px;
-    margin: 0 auto 40px;
+    margin: 0 auto 36px;
 }
 
-.refer-confirm .refer-btn {
-    margin-top: 0;
+.refer-confirm-label {
+    margin: 30px 0 10px;
+    font-family: 'Work Sans', 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #555;
 }
+
+.refer-confirm-label.first { margin-top: 0; }
 
 .refer-link-box {
-    margin: 22px auto 0;
-    max-width: 418px;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
     display: flex;
     border: 1px solid var(--gold);
+    background: #fff;
 }
 
 .refer-link-box input {
@@ -196,25 +221,84 @@
     min-width: 0;
     border: none;
     padding: 12px 14px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Work Sans', 'Montserrat', sans-serif;
     font-size: 14px;
     color: var(--dark-green);
-    background: #fffaf0;
+    background: transparent;
     outline: none;
 }
 
 .refer-link-box button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     border: none;
-    background: var(--gold);
-    color: var(--dark-green);
-    padding: 0 16px;
+    background: #1B201C;
+    color: var(--gold);
+    padding: 0 18px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
     font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
-    font-family: 'Open Sans', sans-serif;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.refer-link-box button:hover {
+    background: var(--gold);
+    color: #1B201C;
+}
+
+/* One-tap share buttons (same style as the email) */
+.refer-share-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.refer-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--gold);
+    background: #fff;
+    color: #1B201C;
+    font-family: 'Work Sans', 'Montserrat', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.refer-share-btn i { color: #b39b63; font-size: 14px; }
+
+.refer-share-btn:hover {
+    background: #1B201C;
+    color: var(--gold);
+    border-color: #1B201C;
+}
+
+.refer-share-btn:hover i { color: var(--gold); }
+
+.refer-confirm-note {
+    max-width: 520px;
+    margin: 32px auto 0;
+    font-family: 'Work Sans', 'Montserrat', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
 }
 
 .refer-confirm .refer-message {
     color: #555;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .refer-confirm-watermark { width: 420px; }
 }
 
 /* Title sizes follow the landing page at each screen width */
